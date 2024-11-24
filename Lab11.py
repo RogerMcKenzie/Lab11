@@ -58,6 +58,10 @@ def calculate_student_grade(student_name, students, assignments, submissions):
                     total_points += points
                     break
     
+    if total_points > 0:
+        grade_percentage = (earned_points / total_points) * 100
+        print(f"{round(grade_percentage)}%")
+        
     grade_percentage = (earned_points / total_points) * 100 if total_points > 0 else 0
     print(f"{round(grade_percentage)}%")
 
