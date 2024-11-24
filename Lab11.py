@@ -71,7 +71,7 @@ def calculate_student_grade(student_name, students, assignments, submissions):
                     break
 
     grade_percentage = (earned_points / total_points) * 100 if total_points > 0 else 0
-    print(f"{match}'s grade: {round(grade_percentage)}%")
+    print(f"{round(grade_percentage)}%")
 
 # Option 2: Assignment statistics
 def assignment_statistics(assignment_name, assignments, submissions):
@@ -134,18 +134,18 @@ def main():
     # Display menu
     print("1. Student grade")
     print("2. Assignment statistics")
-    print("3. Assignment graph")
+    print("3. Assignment graph\n")  # Added newline for formatting
 
-    choice = input("Enter your selection: ").strip()
+    choice = input("Enter your selection: ")
 
     if choice == "1":
-        student_name = input("What is the student's name: ").strip()
+        student_name = input("What is the student's name: ")
         calculate_student_grade(student_name, students, assignments, submissions)
     elif choice == "2":
-        assignment_name = input("What is the assignment name: ").strip()
+        assignment_name = input("What is the assignment name: ")
         assignment_statistics(assignment_name, assignments, submissions)
     elif choice == "3":
-        assignment_name = input("What is the assignment name: ").strip()
+        assignment_name = input("What is the assignment name: ")
         generate_histogram(assignment_name, assignments, submissions)
     else:
         print("Invalid selection. Program exiting.")
