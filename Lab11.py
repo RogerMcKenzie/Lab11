@@ -50,6 +50,9 @@ def calculate_student_grade(student_name, students, assignments, submissions):
         None
     )
 
+    if not match:
+        print(f"What is the student's name: {student_name}")  # Output the student's name if not found
+        return
 
     student_id = students[match]
     total_points = 0
@@ -68,7 +71,7 @@ def calculate_student_grade(student_name, students, assignments, submissions):
                     break
 
     grade_percentage = (earned_points / total_points) * 100 if total_points > 0 else 0
-    print(f"{round(grade_percentage)}%")
+    print(f"What is the student's name: {round(grade_percentage)}%")
 
 # Option 2: Assignment statistics
 def assignment_statistics(assignment_name, assignments, submissions):
@@ -80,17 +83,17 @@ def assignment_statistics(assignment_name, assignments, submissions):
     )
 
     if not match:
-        print("Assignment not found")
+        print("What is the assignment name: Assignment not found")
         return
 
     assignment_id, _ = assignments[match]
     scores = [submission[2] for submission in submissions if submission[1] == assignment_id]
 
     if not scores:
-        print("No scores found for the assignment.")
+        print("What is the assignment name: No scores found for the assignment.")
         return
 
-    print(f"Min: {min(scores)}%")
+    print(f"What is the assignment name: Min: {min(scores)}%")
     print(f"Avg: {sum(scores) / len(scores):.0f}%")
     print(f"Max: {max(scores)}%")
 
@@ -104,14 +107,14 @@ def generate_histogram(assignment_name, assignments, submissions):
     )
 
     if not match:
-        print("Assignment not found")
+        print("What is the assignment name: Assignment not found")
         return
 
     assignment_id, _ = assignments[match]
     scores = [submission[2] for submission in submissions if submission[1] == assignment_id]
 
     if not scores:
-        print("No scores found for the assignment.")
+        print("What is the assignment name: No scores found for the assignment.")
         return
 
     # Plot histogram
