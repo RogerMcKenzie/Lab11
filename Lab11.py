@@ -15,7 +15,7 @@ def read_students():
         for line in file:
             parts = line.strip().split(",")
             if len(parts) == 2:
-                student_id, name = parts
+                name, student_id = parts  # Corrected order
                 students[name.strip()] = student_id.strip()
     return students
 
@@ -25,7 +25,7 @@ def read_assignments():
         for line in file:
             parts = line.strip().split(",")
             if len(parts) == 3:
-                assignment_id, name, points = parts
+                name, assignment_id, points = parts  # Corrected order
                 assignments[name.strip()] = (assignment_id.strip(), int(points.strip()))
     return assignments
 
@@ -93,9 +93,9 @@ def assignment_statistics(assignment_name, assignments, submissions):
         print("No scores found for the assignment.")
         return
 
-    print(f"Min: {min(scores)}%")
+    print(f"Min: {min(scores):.0f}%")
     print(f"Avg: {sum(scores) / len(scores):.0f}%")
-    print(f"Max: {max(scores)}%")
+    print(f"Max: {max(scores):.0f}%")
 
 # Option 3: Generate histogram
 def generate_histogram(assignment_name, assignments, submissions):
