@@ -50,9 +50,6 @@ def calculate_student_grade(student_name, students, assignments, submissions):
         None
     )
 
-    if not match:
-        print("Student not found")
-        return
 
     student_id = students[match]
     total_points = 0
