@@ -43,11 +43,18 @@ def read_submissions():
 
 # Option 1: Calculate student's total grade
 def calculate_student_grade(student_name, students, assignments, submissions):
-    if student_name not in students:
+    # Normalize the student name for case-insensitive comparison
+    normalized_name = student_name.strip().lower()
+    match = next(
+        (name for name in students if name.strip().lower() == normalized_name),
+        None
+    )
+
+    if not match:
         print("Student not found")
         return
 
-    student_id = students[student_name]
+    student_id = students[match]
     total_points = 0
     earned_points = 0
 
@@ -64,14 +71,14 @@ def calculate_student_grade(student_name, students, assignments, submissions):
                     break
 
     grade_percentage = (earned_points / total_points) * 100 if total_points > 0 else 0
-    print(f"{student_name}'s grade: {round(grade_percentage)}%")
+    print(f"{match}'s grade: {round(grade_percentage)}%")
 
 # Option 2: Assignment statistics
 def assignment_statistics(assignment_name, assignments, submissions):
     # Normalize the assignment name for case-insensitive comparison
     normalized_name = assignment_name.strip().lower()
     match = next(
-        (name for name in assignments if name.strip().lower() == normalized_name), 
+        (name for name in assignments if name.strip().lower() == normalized_name),
         None
     )
 
