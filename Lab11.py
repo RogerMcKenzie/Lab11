@@ -68,11 +68,18 @@ def calculate_student_grade(student_name, students, assignments, submissions):
 
 # Option 2: Assignment statistics
 def assignment_statistics(assignment_name, assignments, submissions):
-    if assignment_name not in assignments:
+    # Normalize the assignment name for case-insensitive comparison
+    normalized_name = assignment_name.strip().lower()
+    match = next(
+        (name for name in assignments if name.strip().lower() == normalized_name), 
+        None
+    )
+
+    if not match:
         print("Assignment not found")
         return
 
-    assignment_id, _ = assignments[assignment_name]
+    assignment_id, _ = assignments[match]
     scores = [submission[2] for submission in submissions if submission[1] == assignment_id]
 
     if not scores:
@@ -80,16 +87,23 @@ def assignment_statistics(assignment_name, assignments, submissions):
         return
 
     print(f"Min: {min(scores)}%")
-    print(f"Avg: {sum(scores) / len(scores)}%")
+    print(f"Avg: {sum(scores) / len(scores):.0f}%")
     print(f"Max: {max(scores)}%")
 
 # Option 3: Generate histogram
 def generate_histogram(assignment_name, assignments, submissions):
-    if assignment_name not in assignments:
+    # Normalize the assignment name for case-insensitive comparison
+    normalized_name = assignment_name.strip().lower()
+    match = next(
+        (name for name in assignments if name.strip().lower() == normalized_name), 
+        None
+    )
+
+    if not match:
         print("Assignment not found")
         return
 
-    assignment_id, _ = assignments[assignment_name]
+    assignment_id, _ = assignments[match]
     scores = [submission[2] for submission in submissions if submission[1] == assignment_id]
 
     if not scores:
@@ -98,7 +112,7 @@ def generate_histogram(assignment_name, assignments, submissions):
 
     # Plot histogram
     plt.hist(scores, bins=[0, 25, 50, 75, 100], edgecolor="black")
-    plt.title(f"Score Distribution for {assignment_name}")
+    plt.title(f"Score Distribution for {match}")
     plt.xlabel("Score Ranges (%)")
     plt.ylabel("Frequency")
     plt.show()
