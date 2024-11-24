@@ -48,7 +48,7 @@ def calculate_student_grade(student_name, students, assignments, submissions):
     student_id = students.get(normalized_name)
 
     if not student_id:
-        print("Student not found")
+        print("Student not found")  # Consistent error message
         return
 
     total_points = 0
@@ -66,7 +66,11 @@ def calculate_student_grade(student_name, students, assignments, submissions):
                     total_points += points
                     break
 
-    grade_percentage = (earned_points / total_points) * 100 if total_points > 0 else 0
+    if total_points == 0:
+        print("No assignments found for the student.")
+        return
+
+    grade_percentage = (earned_points / total_points) * 100
     print(f"{round(grade_percentage)}%")
 
 # Option 2: Assignment statistics
