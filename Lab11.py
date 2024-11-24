@@ -15,7 +15,7 @@ def read_students():
         for line in file:
             parts = line.strip().split(",")
             if len(parts) == 2:
-                name, student_id = parts  # Corrected order
+                student_id, name = parts
                 students[name.strip()] = student_id.strip()
     return students
 
@@ -25,7 +25,7 @@ def read_assignments():
         for line in file:
             parts = line.strip().split(",")
             if len(parts) == 3:
-                name, assignment_id, points = parts  # Corrected order
+                assignment_id, name, points = parts
                 assignments[name.strip()] = (assignment_id.strip(), int(points.strip()))
     return assignments
 
@@ -51,7 +51,7 @@ def calculate_student_grade(student_name, students, assignments, submissions):
     )
 
     if not match:
-        print("Student not found")
+        print("What is the student's name: Student not found")
         return
 
     student_id = students[match]
@@ -71,7 +71,7 @@ def calculate_student_grade(student_name, students, assignments, submissions):
                     break
 
     grade_percentage = (earned_points / total_points) * 100 if total_points > 0 else 0
-    print(f"{round(grade_percentage)}%")
+    print(f"What is the student's name: {round(grade_percentage)}%")
 
 # Option 2: Assignment statistics
 def assignment_statistics(assignment_name, assignments, submissions):
@@ -83,19 +83,19 @@ def assignment_statistics(assignment_name, assignments, submissions):
     )
 
     if not match:
-        print("Assignment not found")
+        print("What is the assignment name: Assignment not found")
         return
 
     assignment_id, _ = assignments[match]
     scores = [submission[2] for submission in submissions if submission[1] == assignment_id]
 
     if not scores:
-        print("No scores found for the assignment.")
+        print("What is the assignment name: No scores found for the assignment.")
         return
 
-    print(f"Min: {min(scores):.0f}%")
+    print(f"What is the assignment name: Min: {min(scores)}%")
     print(f"Avg: {sum(scores) / len(scores):.0f}%")
-    print(f"Max: {max(scores):.0f}%")
+    print(f"Max: {max(scores)}%")
 
 # Option 3: Generate histogram
 def generate_histogram(assignment_name, assignments, submissions):
@@ -107,14 +107,14 @@ def generate_histogram(assignment_name, assignments, submissions):
     )
 
     if not match:
-        print("Assignment not found")
+        print("What is the assignment name: Assignment not found")
         return
 
     assignment_id, _ = assignments[match]
     scores = [submission[2] for submission in submissions if submission[1] == assignment_id]
 
     if not scores:
-        print("No scores found for the assignment.")
+        print("What is the assignment name: No scores found for the assignment.")
         return
 
     # Plot histogram
@@ -134,18 +134,18 @@ def main():
     # Display menu
     print("1. Student grade")
     print("2. Assignment statistics")
-    print("3. Assignment graph\n")  # Added newline for formatting
+    print("3. Assignment graph")
 
-    choice = input("Enter your selection: ")
+    choice = input("Enter your selection: ").strip()
 
     if choice == "1":
-        student_name = input("What is the student's name: ")
+        student_name = input("What is the student's name: ").strip()
         calculate_student_grade(student_name, students, assignments, submissions)
     elif choice == "2":
-        assignment_name = input("What is the assignment name: ")
+        assignment_name = input("What is the assignment name: ").strip()
         assignment_statistics(assignment_name, assignments, submissions)
     elif choice == "3":
-        assignment_name = input("What is the assignment name: ")
+        assignment_name = input("What is the assignment name: ").strip()
         generate_histogram(assignment_name, assignments, submissions)
     else:
         print("Invalid selection. Program exiting.")
